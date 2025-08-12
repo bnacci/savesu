@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react",
+    "reactNamespace": "React",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@typed": ["./resources/js/types"],
+      "@lib/*": ["./resources/js/lib/*"],
+      "@components/*": ["./resources/js/components/*"],
+      "@hooks/*": ["./resources/js/hooks/*"],
+      "@layouts/*": ["./resources/js/layouts/*"],
+      "@pages/*": ["./resources/js/pages/*"]
+    },
+    "types": ["vite/client"],
+    "lib": ["esnext", "dom"]
+  },
+  "include": [
+    "./resources/**/*",
+    "./resources/**/*.jsx",
+    "./resources/**/*.tsx",
+    "./resources/**/*.ts",
+    "./resources/**/*.js",
+    "vite.config.ts"
+  ],
+  "exclude": ["node_modules"]
+}
