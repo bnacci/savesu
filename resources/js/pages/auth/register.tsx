@@ -21,7 +21,7 @@ type FormProps = {
   terms: boolean;
 };
 
-export default function Register() {
+export default function Register({ error }: { error: string }) {
   const page = useTypedPage();
   const route = useRoute();
   const { __, trans, _r } = useLang();
@@ -55,6 +55,7 @@ export default function Register() {
         title: __('auth.register.title'),
         description: __('auth.register.description'),
       }}
+      error={error}
     >
       <div className="flex gap-2">
         <div className="grid gap-2 w-full">

@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
             $event->extendSocialite('google', \SocialiteProviders\Google\Provider::class);
             $event->extendSocialite('facebook', \SocialiteProviders\Facebook\Provider::class);
             $event->extendSocialite('discord', \SocialiteProviders\Discord\Provider::class);
-            $event->extendSocialite('microsoft', \SocialiteProviders\Microsoft\Provider::class);
+            $event->extendSocialite('dribbble', \SocialiteProviders\Dribbble\Provider::class);
             $event->extendSocialite('twitch', \SocialiteProviders\Twitch\Provider::class);
             $event->extendSocialite('linkedin', \SocialiteProviders\LinkedIn\Provider::class);
             $event->extendSocialite('spotify', \SocialiteProviders\Spotify\Provider::class);

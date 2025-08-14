@@ -13,6 +13,7 @@ class SocialLoginController extends Controller
 {
     public function redirectToProvider($provider)
     {
+        session(["oauth_error_back" => request()->back]);
         return Socialite::driver($provider)->redirect();
     }
 
@@ -40,35 +41,55 @@ class SocialLoginController extends Controller
             $email    = $socialUser->getEmail() ? $socialUser->getEmail() : Str::slug($nickname, "_") . "@savesu.com";
             $explode  = explode(" ", $nickname);
 
-            // dd(count($explode) <= 1 ? $socialUser->getNickname() : Str::slug($socialUser->getNickname(), "_"));
-
             $username = $nickname ? (count($explode) <= 1 ? $nickname : Str::slug($nickname, "_")) : $this->generateUsernameFromEmail($email);
 
-            $user = User::updateOrCreate(
-                ['provider_id' => $socialUser->getId()],
-                [
-                    'username'          => $username,
-                    'email'             => $email,
-                    'name'              => $socialUser->getName(),
-                    'provider_id'       => $socialUser->getId(),
-                    'provider'          => $provider,
-                    'password'          => bcrypt($socialUser->getId()),
-                    'avatar'            => $socialUser->getAvatar(),
-                    'email_verified_at' => now(),
-                ]
-            );
+            $user = User::where("email", $email)
+                ->where("provider", $provider)
+                ->where("provider_id", $socialUser->getId())
+                ->first();
 
-            $user->ownedTeams()->save(Team::forceCreate([
-                'user_id'       => $user->id,
-                'name'          => $username . "'s Team",
-                'personal_team' => true,
-            ]));
+            if ($user) {
+                Auth::login($user);
+            } else {
 
-            Auth::login($user);
+                if (User::where("email", $email)
+                    ->orWhere("username", $username)
+                    ->exists()) {
+                    return redirect()->route(session("oauth_error_back"))
+                        ->with('error', __('auth.errors.user_exists'));
+                }
+
+                $user = User::updateOrCreate(
+                    [
+                        'provider_id' => $socialUser->getId(),
+                        'provider'    => $provider,
+                    ],
+                    [
+                        'username'          => $username,
+                        'email'             => $email,
+                        'name'              => $socialUser->getName(),
+                        'provider_id'       => $socialUser->getId(),
+                        'provider'          => $provider,
+                        'password'          => bcrypt($socialUser->getId()),
+                        'avatar'            => $socialUser->getAvatar(),
+                        'email_verified_at' => now(),
+                    ]
+                );
+
+                $user->ownedTeams()->save(Team::forceCreate([
+                    'user_id'       => $user->id,
+                    'name'          => $username . "'s Team",
+                    'personal_team' => true,
+                ]));
+
+                Auth::login($user);
+            }
+
+            session()->forget("oauth_error_back");
 
             return redirect()->route('dashboard');
         } catch (InvalidStateException $e) {
-            return redirect()->route('login')->with('status', 'Login canceled or failed. Please try again.');
+            return redirect()->route(session("oauth_error_back"))->with('error', __('auth.errors.login_failed'));
         }
     }
 }

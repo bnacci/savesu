@@ -106,4 +106,9 @@ return [
     'access_with_email'         => 'Access with email',
     'create_account_with_email' => 'Create account with email',
     'or_continue_with'          => 'Or continue with',
+
+    'errors'                    => [
+        'user_exists'  => 'Email or username has already been chosen. Try another one and stay strong in the purpose God has for you!',
+        'login_failed' => 'Login was canceled or unsuccessful. Please try again with faith and confidence!',
+    ],
 ];

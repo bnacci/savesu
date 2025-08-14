@@ -8,8 +8,8 @@ use Inertia\Inertia;
 Route::group([
     'prefix'     => LaravelLocalization::setLocale(),
     'middleware' => [
-        'localeSessionRedirect',
         'localizationRedirect',
+        'localeSessionRedirect',
         'localeCookieRedirect',
     ]], function () {
     Route::get('/', function () {
@@ -21,12 +21,19 @@ Route::group([
         ]);
     })->name("index");
 
-// Route::inertia('/about', 'About');
+    Route::prefix("security")->group(function () {
+        Route::get('/locked', function () {
+            session(["user_locked" => true]);
+            return inertia('auth/locked', [
+                "back" => request()->back,
+            ]);
+        })->name("user.locked");
+    });
+
     Route::get("/about", function () {
         seo()->title("About");
         return Inertia::render("About");
     })->name("about");
-// ->middleware("password.confirm");
 
     Route::middleware([
         'auth:sanctum',

@@ -2,11 +2,16 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 import { create } from 'zustand';
 
-type AuthStoreState = { showForm: boolean; showedSlogan: boolean };
+type AuthStoreState = {
+  showForm: boolean;
+  showedSlogan: boolean;
+  lockedPage: boolean;
+};
 
 type AuthStoreActions = {
   setShowForm: (show: AuthStoreState['showForm']) => void;
   setShowedSlogan: (show: AuthStoreState['showedSlogan']) => void;
+  setLockedPage: (show: AuthStoreState['lockedPage']) => void;
 };
 
 type AuthStore = AuthStoreState & AuthStoreActions;
@@ -24,6 +29,12 @@ export const useAuthStore = create<AuthStore>()(
       setShowedSlogan: (show: AuthStoreState['showedSlogan']) => {
         set(state => ({
           showedSlogan: show,
+        }));
+      },
+      lockedPage: false,
+      setLockedPage: (show: AuthStoreState['showedSlogan']) => {
+        set(state => ({
+          lockedPage: show,
         }));
       },
     }),

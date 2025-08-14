@@ -67,12 +67,15 @@ class FortifyServiceProvider extends ServiceProvider
             return inertia('auth/login', [
                 'canResetPassword' => Route::has('password.request'),
                 'status'           => $request->session()->get('status'),
+                'error'            => $request->session()->get('error'),
             ])->toResponse($request);
         });
 
         Fortify::registerView(function (Request $request) {
             seo()->title(__("auth.register.title"))->description(__("auth.register.description"));
-            return inertia('auth/register')->toResponse($request);
+            return inertia('auth/register', [
+                'error' => $request->session()->get('error'),
+            ])->toResponse($request);
         });
 
         Fortify::twoFactorChallengeView(function (Request $request) {

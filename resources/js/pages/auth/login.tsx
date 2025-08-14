@@ -14,6 +14,7 @@ import useRoute from '@hooks/useRoute';
 interface Props {
   canResetPassword: boolean;
   status: string;
+  error: string;
 }
 
 type FormProps = {
@@ -22,7 +23,7 @@ type FormProps = {
   remember: boolean;
 };
 
-export default function Login({ canResetPassword, status }: Props) {
+export default function Login({ canResetPassword, status, error }: Props) {
   const route = useRoute();
   const { setData, post, data, reset, errors, processing } = useForm<FormProps>(
     {
@@ -53,6 +54,7 @@ export default function Login({ canResetPassword, status }: Props) {
         description: __('auth.login.description'),
       }}
       status={status}
+      error={error}
     >
       <div className="grid gap-2">
         <Label htmlFor="username">{__('common.email_or_username')}</Label>

@@ -3,6 +3,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 class InertiaSeoMiddleware
@@ -16,6 +17,12 @@ class InertiaSeoMiddleware
     {
         seo()->title(config('app.name'))
             ->description(__("app.description"));
+
+        // dd(session()->get("user_locked"));
+
+        if (session()->get("user_locked") && ! Route::is("user.locked")) {
+            return redirect()->route("user.locked");
+        }
 
         return $next($request);
     }

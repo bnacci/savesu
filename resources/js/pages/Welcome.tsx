@@ -1,6 +1,10 @@
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
+import React, { useEffect } from 'react';
+
+import { BackgroundGradientAnimation } from '@components/ui/background-gradient-animation';
 import { Link } from '@inertiajs/react';
-import React from 'react';
+import { useAuthStore } from '@lib/store/auth-store';
+import { useIdle } from '@uidotdev/usehooks';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
 
@@ -19,6 +23,15 @@ export default function Welcome({
 }: Props) {
   const route = useRoute();
   const page = useTypedPage();
+  const { lockedPage, setLockedPage } = useAuthStore();
+  const idle = useIdle(5000);
+
+  useEffect(() => {
+    if (!lockedPage && idle) {
+      window.location.href = `/locked?back=${window.location.href}`;
+      setLockedPage(true);
+    }
+  }, [idle]);
 
   return (
     <>

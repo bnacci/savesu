@@ -3,7 +3,7 @@ import { Button, buttonVariants } from '@components/ui/button';
 import { Head, Link, usePage } from '@inertiajs/react';
 import React, { PropsWithChildren, useEffect, useState } from 'react';
 
-import AuthLogo from '@components/auth-logo';
+import Logo from '@components/logo';
 import SocialButtons from '@components/social-buttons';
 import { TextGenerateEffect } from '@components/ui/text-generate-effect';
 import { cn } from '@lib/utils';
@@ -20,42 +20,10 @@ interface Props {
   onSubmit: (e: React.FormEvent) => void;
   socialButtons?: boolean;
   status?: string | null | undefined;
+  error?: string | null | undefined;
 }
 
-// const savesuSlogans = [
-//   {
-//     slogan: 'Saved to Serve, Called to Connect.',
-//     description:
-//       'Savesu is more than just a platform — it’s a calling. We believe every believer is saved by grace to serve others and called to connect with the Body of Christ. Here, you’ll find tools, teachings, and a community to help you live out your faith in purpose and unity.',
-//   },
-//   {
-//     slogan: 'Faith. Community. Purpose.',
-//     description:
-//       "At Savesu, everything we do is built on three pillars: unwavering faith, authentic Christian community, and a God-given purpose. Whether you're here to grow spiritually, find support, or serve others, this is the place to walk your journey with Christ — together.",
-//   },
-//   {
-//     slogan: 'Where Salvation Meets Connection.',
-//     description:
-//       'Savesu bridges the gap between your personal faith and the global Church. It’s a space where your salvation story is just the beginning — and connection with others turns belief into shared mission. Join a movement that unites hearts through Christ.',
-//   },
-//   {
-//     slogan: 'Join the Journey. Live the Gospel.',
-//     description:
-//       'The walk of faith isn’t meant to be traveled alone. With Savesu, you’re invited to join a Christ-centered journey, grow deeper in God’s Word, and live out the gospel through connection, service, and love. This is your next step — together in faith.',
-//   },
-//   {
-//     slogan: 'More than a Platform, a Purpose.',
-//     description:
-//       'Savesu isn’t just a digital space — it’s a God-given mission. Here, you’ll find more than content and community; you’ll discover purpose, identity, and belonging in Christ. Everything we do is designed to help you walk boldly in your calling.',
-//   },
-//   {
-//     slogan: 'United in Christ, Connected in Purpose.',
-//     description:
-//       'In a divided world, Savesu exists to unite believers under one name — Jesus. We’re building a global community that’s rooted in the gospel and driven by purpose. Together, we serve, grow, and reflect the love of Christ wherever we are.',
-//   },
-// ];
-
-type Slogan = { slogan: string; description: string };
+type SloganProps = { slogan: string; description: string };
 
 export default function AuthLayout({
   title,
@@ -64,20 +32,15 @@ export default function AuthLayout({
   onSubmit,
   socialButtons = true,
   status,
+  error,
 }: PropsWithChildren<Props>) {
   const currentRoute = route().current();
-  //   const [showForm, setShowForm] = useState(!socialButtons);
   const { showForm, setShowForm, showedSlogan, setShowedSlogan } =
     useAuthStore();
   const [showSecond, setShowSecond] = useState(false);
-  const { slogan } = usePage<{ slogan: Slogan }>().props;
   const { __ } = useLang();
 
   useEffect(() => {
-    // if (socialButtons) {
-    //   setShowForm(showForm && socialButtons);
-    // }
-
     const searchParams = new URLSearchParams(window.location.search);
     let params: { [key: string]: string } = {};
     for (let param of searchParams) {
@@ -106,40 +69,19 @@ export default function AuthLayout({
             {/* Radial gradient for the container to give a faded look */}
             <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
 
-            <div className="flex justify-center gap-2 md:justify-start relative z-10">
-              <AuthLogo />
+            <div className="flex justify-between gap-2 items-center relative z-10">
+              <Link href="/" className="flex items-center gap-x-3 select-none">
+                <Logo className="w-32" />
+              </Link>
+              <span className="uppercase flex flex-col text-center select-none pointer-events-none">
+                <span className="font-extrabold tracking-[0.5em] text-base">
+                  #Jesus
+                </span>
+                <span className="tracking-[0.2em] text-xs">LivesForYou</span>
+              </span>
             </div>
 
-            {slogan && (
-              <div className="relative z-10 mt-auto">
-                {!showedSlogan ? (
-                  <>
-                    <TextGenerateEffect
-                      words={slogan.slogan}
-                      className="text-6xl mb-10"
-                      onComplete={() => {
-                        setShowSecond(true);
-                      }}
-                    />
-
-                    {showSecond && (
-                      <TextGenerateEffect
-                        className="font-normal"
-                        words={slogan.description}
-                        onComplete={() => setShowedSlogan(true)}
-                      />
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <span className="font-bold text-6xl mb-10 block">
-                      {slogan.slogan}
-                    </span>
-                    <span>{slogan.description}</span>
-                  </>
-                )}
-              </div>
-            )}
+            <Slogan />
           </div>
         </div>
 
@@ -155,8 +97,14 @@ export default function AuthLayout({
                 </div>
 
                 {status && (
-                  <div className="rounded-md border border-emerald-500/30 px-4 py-3 text-emerald-600 text-center bg-emerald-50/40">
+                  <div className="rounded-md border border-primary-500/30 px-4 py-3 text-primary-600 text-center bg-primary-50/40">
                     <p>{status}</p>
+                  </div>
+                )}
+
+                {error && (
+                  <div className="rounded-md border border-red-500/30 px-4 py-3 text-primary-600 text-center bg-red-50/40">
+                    <p>{error}</p>
                   </div>
                 )}
 
@@ -246,5 +194,44 @@ export default function AuthLayout({
         </div>
       </div>
     </>
+  );
+}
+
+function Slogan() {
+  const { showedSlogan, setShowedSlogan } = useAuthStore();
+  const [showSecond, setShowSecond] = useState(false);
+  const { slogan } = usePage<{ slogan: SloganProps }>().props;
+
+  return (
+    slogan && (
+      <div className="relative z-10 mt-auto">
+        {!showedSlogan ? (
+          <>
+            <TextGenerateEffect
+              words={slogan.slogan}
+              className="text-6xl mb-10"
+              onComplete={() => {
+                setShowSecond(true);
+              }}
+            />
+
+            {showSecond && (
+              <TextGenerateEffect
+                className="font-normal"
+                words={slogan.description}
+                onComplete={() => setShowedSlogan(true)}
+              />
+            )}
+          </>
+        ) : (
+          <>
+            <span className="font-bold text-6xl mb-10 block">
+              {slogan.slogan}
+            </span>
+            <span>{slogan.description}</span>
+          </>
+        )}
+      </div>
+    )
   );
 }

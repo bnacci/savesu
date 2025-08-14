@@ -17,7 +17,7 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
         type={isVisible ? 'text' : type}
         data-slot="input"
         className={cn(
-          'file:text-foreground bg-white placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-10 w-full min-w-0 rounded-md border px-3 py-1 shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+          'file:text-foreground bg-white placeholder:text-muted-foreground selection:bg-primary-100 selection:text-primary-950 dark:bg-input/30 border-input flex h-10 w-full min-w-0 rounded-md border px-3 py-1 shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
           'focus-visible:border-primary-500 focus-visible:ring-primary-500/50 focus-visible:ring-[3px]',
           'aria-invalid:ring-red-500/20 aria-invalid:bg-red-50 aria-invalid:text-red-500 aria-invalid:selection:bg-red-400 dark:aria-invalid:ring-red-500/40 aria-invalid:border-red-500 aria-invalid:placeholder:text-red-200',
           type === 'password' && 'pr-10',

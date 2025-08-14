@@ -14,51 +14,51 @@ return [
     |
     */
 
-    'postmark'  => [
+    'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
 
-    'resend'    => [
+    'resend'   => [
         'key' => env('RESEND_KEY'),
     ],
 
-    'ses'       => [
+    'ses'      => [
         'key'    => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'slack'     => [
+    'slack'    => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
             'channel'              => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
 
-    'github'    => [
+    'github'   => [
         'client_id'     => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect'      => env('GITHUB_REDIRECT_URI'),
     ],
 
-    'google'    => [
+    'google'   => [
         'client_id'     => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect'      => env('GOOGLE_REDIRECT_URI'),
     ],
 
-    'facebook'  => [
+    'facebook' => [
         'client_id'     => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
         'redirect'      => env('FACEBOOK_REDIRECT_URI'),
     ],
 
-    'reddit'    => [
+    'reddit'   => [
         'client_id'     => env('REDDIT_CLIENT_ID'),
         'client_secret' => env('REDDIT_CLIENT_SECRET'),
         'redirect'      => env('REDDIT_REDIRECT_URI'),
     ],
-    'discord'   => [
+    'discord'  => [
         'client_id'                => env('DISCORD_CLIENT_ID'),
         'client_secret'            => env('DISCORD_CLIENT_SECRET'),
         'redirect'                 => env('DISCORD_REDIRECT_URI'),
@@ -68,26 +68,25 @@ return [
         'avatar_default_extension' => env('DISCORD_EXTENSION_DEFAULT', 'png'), // only pick from jpg, png, webp
     ],
 
-    'microsoft' => [
-        'client_id'     => env('MICROSOFT_CLIENT_ID'),
-        'client_secret' => env('MICROSOFT_CLIENT_SECRET'),
-        'redirect'      => env('MICROSOFT_REDIRECT_URI'),
-        'proxy'         => env('PROXY'), // Optional, will be used for all requests
+    'dribbble' => [
+        'client_id'     => env('DRIBBBLE_CLIENT_ID'),
+        'client_secret' => env('DRIBBBLE_CLIENT_SECRET'),
+        'redirect'      => env('DRIBBBLE_REDIRECT_URI'),
     ],
 
-    'twitch'    => [
+    'twitch'   => [
         'client_id'     => env('TWITCH_CLIENT_ID'),
         'client_secret' => env('TWITCH_CLIENT_SECRET'),
         'redirect'      => env('TWITCH_REDIRECT_URI'),
     ],
 
-    'linkedin'  => [
+    'linkedin' => [
         'client_id'     => env('LINKEDIN_CLIENT_ID'),
         'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
         'redirect'      => env('LINKEDIN_REDIRECT_URI'),
     ],
 
-    'spotify'   => [
+    'spotify'  => [
         'client_id'     => env('SPOTIFY_CLIENT_ID'),
         'client_secret' => env('SPOTIFY_CLIENT_SECRET'),
         'redirect'      => env('SPOTIFY_REDIRECT_URI'),
