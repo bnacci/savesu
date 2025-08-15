@@ -93,7 +93,7 @@ export default function Login({ canResetPassword, status, error }: Props) {
           autoComplete="current-password"
           disabled={processing}
           aria-invalid={errors.password ? true : false}
-          placeholder={__('auth.placeholders.login.username')}
+          placeholder={__('auth.placeholders.login.password')}
         />
         <InputError message={errors.password} />
       </div>

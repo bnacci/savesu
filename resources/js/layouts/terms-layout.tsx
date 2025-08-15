@@ -17,7 +17,7 @@ export default function TermsLayout({ data, title }: Props) {
       <div className="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
         <div>
           <Link href={route('index')}>
-            <Logo className="size-24" />
+            <Logo className="size-24" type="single" />
           </Link>
         </div>
 

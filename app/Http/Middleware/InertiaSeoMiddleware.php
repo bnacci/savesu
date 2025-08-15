@@ -18,10 +18,10 @@ class InertiaSeoMiddleware
         seo()->title(config('app.name'))
             ->description(__("app.description"));
 
-        // dd(session()->get("user_locked"));
-
-        if (session()->get("user_locked") && ! Route::is("user.locked")) {
-            return redirect()->route("user.locked");
+        if (auth()->check() && session()->get("user_locked") && ! Route::is("user.locked") && ! Route::is("user.unlock") && ! Route::is("page.locked-page") && ! Route::is("logout")) {
+            return redirect()->route("user.locked", [
+                "ref" => base64_encode(route("dashboard")),
+            ]);
         }
 
         return $next($request);

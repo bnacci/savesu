@@ -108,7 +108,10 @@ return [
     'or_continue_with'          => 'Ou continuar com',
 
     'errors'                    => [
-        'user_exists'  => 'E-mail ou nome de usuário já foi escolhido. Experimente outro e siga firme no propósito que Deus tem pra você!',
-        'login_failed' => 'O login foi cancelado ou não teve sucesso. Tente novamente com fé e confiança!',
+        'user_exists'        => 'E-mail ou nome de usuário já foi escolhido. Experimente outro e siga firme no propósito que Deus tem pra você!',
+        'login_failed'       => 'O login foi cancelado ou não teve sucesso. Tente novamente com fé e confiança!',
+        'password_incorrect' => 'Hmm, essa senha não parece estar certa. Tentar de novo?',
     ],
+
+    'why_seeing_page'           => 'Por que estou vendo está página?',
 ];

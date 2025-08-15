@@ -5,7 +5,12 @@ import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { cn } from '@lib/utils';
 import { useState } from 'react';
 
-function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
+function Input({
+  className,
+  type,
+  passwordInputClassName,
+  ...props
+}: React.ComponentProps<'input'> & { passwordInputClassName?: string }) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const toggleVisibility = () => setIsVisible(prevState => !prevState);
@@ -28,7 +33,10 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
 
       {type === 'password' && (
         <button
-          className="text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute inset-y-0 end-0 flex h-full size-9 items-center justify-center rounded-e-md transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 right-1 cursor-pointer"
+          className={cn(
+            'text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 right-1 cursor-pointer',
+            passwordInputClassName,
+          )}
           type="button"
           onClick={toggleVisibility}
           aria-label={isVisible ? 'Hide password' : 'Show password'}

@@ -21,4 +21,8 @@ return [
     'log_out'             => 'Sair',
     'recovery_code'       => 'Código de recuperação',
     'code'                => 'Código',
+    'locked_page'         => 'Página de bloqueio',
+    'lock_screen'         => 'Tela de bloqueio',
+    'unlock'              => 'Desbloquear',
+    'unlocking'           => 'Desbloqueando...',
 ];

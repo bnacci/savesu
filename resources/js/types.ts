@@ -13,6 +13,7 @@ export interface Team {
 export interface User {
   id: number;
   name: string;
+  username: string;
   email: string;
   current_team_id: Nullable<number>;
   profile_photo_path: Nullable<string>;

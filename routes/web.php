@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\SocialLoginController;
+use App\Http\Controllers\Pages\LockedPageController;
+use App\Http\Controllers\User\SecurityController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -8,7 +10,7 @@ use Inertia\Inertia;
 Route::group([
     'prefix'     => LaravelLocalization::setLocale(),
     'middleware' => [
-        'localizationRedirect',
+        // 'localizationRedirect',
         'localeSessionRedirect',
         'localeCookieRedirect',
     ]], function () {
@@ -21,13 +23,10 @@ Route::group([
         ]);
     })->name("index");
 
-    Route::prefix("security")->group(function () {
-        Route::get('/locked', function () {
-            session(["user_locked" => true]);
-            return inertia('auth/locked', [
-                "back" => request()->back,
-            ]);
-        })->name("user.locked");
+    Route::middleware(['auth:sanctum'])->prefix("security")->group(function () {
+        Route::get('/locked', [SecurityController::class, "locked"])->name("user.locked");
+        Route::post('/lock', [SecurityController::class, "lock"])->name("user.lock");
+        Route::post('/unlock', [SecurityController::class, "unlock"])->name("user.unlock");
     });
 
     Route::get("/about", function () {
@@ -48,6 +47,13 @@ Route::group([
     Route::get('/oauth/{provider}', [SocialLoginController::class, 'redirectToProvider'])->name("oauth");
     Route::get('/oauth/{provider}/callback', [SocialLoginController::class, 'handleProviderCallback']);
 
-    require_once __DIR__ . "/fortify.php";
+    Route::prefix("p")->name("page.")->group(function () {
+        Route::get("locked-page", [LockedPageController::class, "show"])->name("locked-page");
+    });
+
+    Route::prefix("auth")->group(function () {
+        require_once __DIR__ . "/fortify.php";
+    });
+
     require_once __DIR__ . "/jetstream.php";
 });

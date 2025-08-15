@@ -21,4 +21,8 @@ return [
     'log_out'             => 'Log Out',
     'recovery_code'       => 'Recover code',
     'code'                => 'Code',
+    'locked_page'         => 'Locked page',
+    'lock_screen'         => 'Lock screen',
+    'unlock'              => 'Unlock',
+    'unlocking'           => 'Unlocking...',
 ];

@@ -23,19 +23,23 @@ export default function Welcome({
 }: Props) {
   const route = useRoute();
   const page = useTypedPage();
-  const { lockedPage, setLockedPage } = useAuthStore();
-  const idle = useIdle(5000);
+  const idle = useIdle(10 * 60 * 1000);
 
   useEffect(() => {
-    if (!lockedPage && idle) {
-      window.location.href = `/locked?back=${window.location.href}`;
-      setLockedPage(true);
+    if (idle && page.props.auth.user) {
+      router.post(
+        route('user.lock', {
+          ref: encodeURIComponent(btoa(window.location.href)),
+        }),
+      );
     }
   }, [idle]);
 
   return (
     <>
       <Head title="Welcome" />
+
+      {idle ? 'Idle' : 'No idle'}
 
       <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
         {canLogin ? (

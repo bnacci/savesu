@@ -21,6 +21,15 @@ use Laravel\Fortify\Http\Controllers\TwoFactorSecretKeyController;
 use Laravel\Fortify\Http\Controllers\VerifyEmailController;
 use Laravel\Fortify\RoutePath;
 
+class Logout
+{
+    public static function destroy()
+    {
+        session()->forget("user_locked");
+        return AuthenticatedSessionController::class;
+    }
+}
+
 Route::group(['middleware' => config('fortify.middleware', ['web'])], function () {
     $enableViews = config('fortify.views', true);
 
@@ -41,7 +50,7 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
             $limiter ? 'throttle:' . $limiter : null,
         ]))->name('login.store');
 
-    Route::post(RoutePath::for('logout', '/logout') , [AuthenticatedSessionController::class, 'destroy'])
+    Route::post(RoutePath::for('logout', '/logout') , [Logout::destroy(), 'destroy'])
         ->middleware([config('fortify.auth_middleware', 'auth') . ':' . config('fortify.guard')])
         ->name('logout');
 
