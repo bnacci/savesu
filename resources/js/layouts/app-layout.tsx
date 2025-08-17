@@ -10,6 +10,7 @@ import ResponsiveNavLink from '@components/ResponsiveNavLink';
 import { Team } from '@typed';
 import classNames from 'classnames';
 import { router } from '@inertiajs/core';
+import { useLockScreen } from '@hooks/useLockScreen';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
 
@@ -25,6 +26,7 @@ export default function AppLayout({
 }: PropsWithChildren<Props>) {
   const page = useTypedPage();
   const route = useRoute();
+  const locked = useLockScreen();
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false);
 

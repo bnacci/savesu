@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Traits\HasSettings;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasSettings;
 
     /**
      * The attributes that are mass assignable.
@@ -36,6 +38,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'provider_id',
         'email_verified_at',
         'avatar',
+        'lock_screen_wallpaper',
+        'settings',
     ];
 
     /**
@@ -48,9 +52,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
-        'provider',
-        'provider_id',
+        // 'provider',
+        // 'provider_id',
         'avatar',
+        'settings',
     ];
 
     /**

@@ -1,17 +1,3 @@
-import useRoute from '@/Hooks/useRoute';
-import useTypedPage from '@/Hooks/useTypedPage';
-import ActionMessage from '@/Components/ActionMessage';
-import ActionSection from '@/Components/ActionSection';
-import ConfirmationModal from '@/Components/ConfirmationModal';
-import DangerButton from '@/Components/DangerButton';
-import DialogModal from '@/Components/DialogModal';
-import FormSection from '@/Components/FormSection';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import SecondaryButton from '@/Components/SecondaryButton';
-import SectionBorder from '@/Components/SectionBorder';
 import {
   JetstreamTeamPermissions,
   Nullable,
@@ -19,11 +5,26 @@ import {
   Team,
   TeamInvitation,
   User,
-} from '@/types';
+} from '@typed';
+import React, { useState } from 'react';
+
+import ActionMessage from '@components/ActionMessage';
+import ActionSection from '@components/ActionSection';
+import { Button } from '@components/ui/button';
+import ConfirmationModal from '@components/ConfirmationModal';
+import DangerButton from '@components/DangerButton';
+import DialogModal from '@components/DialogModal';
+import FormSection from '@components/FormSection';
+import { Input } from '@components/ui/input';
+import InputError from '@components/InputError';
+import { Label } from '@components/ui/label';
+import SecondaryButton from '@components/SecondaryButton';
+import SectionBorder from '@components/SectionBorder';
+import classNames from 'classnames';
 import { router } from '@inertiajs/core';
 import { useForm } from '@inertiajs/react';
-import classNames from 'classnames';
-import React, { useState } from 'react';
+import useRoute from '@hooks/useRoute';
+import useTypedPage from '@hooks/useTypedPage';
 
 interface UserMembership extends User {
   membership: {
@@ -147,14 +148,14 @@ export default function TeamMemberManager({
                   Added.
                 </ActionMessage>
 
-                <PrimaryButton
+                <Button
                   className={classNames({
                     'opacity-25': addTeamMemberForm.processing,
                   })}
                   disabled={addTeamMemberForm.processing}
                 >
                   Add
-                </PrimaryButton>
+                </Button>
               </>
             )}
           >
@@ -167,8 +168,8 @@ export default function TeamMemberManager({
 
             {/* <!-- Member Email --> */}
             <div className="col-span-6 sm:col-span-4">
-              <InputLabel htmlFor="email" value="Email" />
-              <TextInput
+              <Label htmlFor="email">Email</Label>
+              <Input
                 id="email"
                 type="email"
                 className="mt-1 block w-full"
@@ -186,7 +187,7 @@ export default function TeamMemberManager({
             {/* <!-- Role --> */}
             {availableRoles.length > 0 ? (
               <div className="col-span-6 lg:col-span-4">
-                <InputLabel htmlFor="roles" value="Role" />
+                <Label htmlFor="roles">Role</Label>
                 <InputError
                   message={addTeamMemberForm.errors.role}
                   className="mt-2"
@@ -446,7 +447,7 @@ export default function TeamMemberManager({
             Cancel
           </SecondaryButton>
 
-          <PrimaryButton
+          <Button
             onClick={updateRole}
             className={classNames('ml-2', {
               'opacity-25': updateRoleForm.processing,
@@ -454,7 +455,7 @@ export default function TeamMemberManager({
             disabled={updateRoleForm.processing}
           >
             Save
-          </PrimaryButton>
+          </Button>
         </DialogModal.Footer>
       </DialogModal>
 

@@ -10,7 +10,6 @@ use Inertia\Inertia;
 Route::group([
     'prefix'     => LaravelLocalization::setLocale(),
     'middleware' => [
-        // 'localizationRedirect',
         'localeSessionRedirect',
         'localeCookieRedirect',
     ]], function () {

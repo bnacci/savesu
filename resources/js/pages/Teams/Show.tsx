@@ -1,16 +1,17 @@
-import DeleteTeamForm from '@/Pages/Teams/Partials/DeleteTeamForm';
-import TeamMemberManager from '@/Pages/Teams/Partials/TeamMemberManager';
-import UpdateTeamNameForm from '@/Pages/Teams/Partials/UpdateTeamNameForm';
-import SectionBorder from '@/Components/SectionBorder';
-import AppLayout from '@/Layouts/AppLayout';
 import {
   JetstreamTeamPermissions,
   Role,
   Team,
   TeamInvitation,
   User,
-} from '@/types';
+} from '@typed';
+
+import AppLayout from '@layouts/app-layout';
+import DeleteTeamForm from '@pages/Teams/Partials/DeleteTeamForm';
 import React from 'react';
+import SectionBorder from '@components/SectionBorder';
+import TeamMemberManager from '@pages/Teams/Partials/TeamMemberManager';
+import UpdateTeamNameForm from '@pages/Teams/Partials/UpdateTeamNameForm';
 
 interface UserMembership extends User {
   membership: {

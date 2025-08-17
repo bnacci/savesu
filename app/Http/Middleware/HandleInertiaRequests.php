@@ -64,6 +64,7 @@ class HandleInertiaRequests extends Middleware
                 'locales'      => LaravelLocalization::getSupportedLocales(),
                 'translations' => File::exists($file) ? json_encode($this->getTranslationsCollection($currenLocale)) : [],
                 'slogan'       => SloganService::getWeeklySlogan(),
+                'defaults'     => config('defaults'),
             ]);
     }
 }

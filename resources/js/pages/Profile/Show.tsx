@@ -1,13 +1,13 @@
+import AppLayout from '@layouts/app-layout';
+import DeleteUserForm from '@pages/Profile/Partials/DeleteUserForm';
+import LogoutOtherBrowserSessions from '@pages/Profile/Partials/LogoutOtherBrowserSessionsForm';
 import React from 'react';
-import DeleteUserForm from '@/Pages/Profile/Partials/DeleteUserForm';
-import LogoutOtherBrowserSessions from '@/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm';
-import TwoFactorAuthenticationForm from '@/Pages/Profile/Partials/TwoFactorAuthenticationForm';
-import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm';
-import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm';
-import useTypedPage from '@/Hooks/useTypedPage';
-import SectionBorder from '@/Components/SectionBorder';
-import AppLayout from '@/Layouts/AppLayout';
-import { Session } from '@/types';
+import SectionBorder from '@components/SectionBorder';
+import { Session } from '@typed';
+import TwoFactorAuthenticationForm from '@pages/Profile/Partials/TwoFactorAuthenticationForm';
+import UpdatePasswordForm from '@pages/Profile/Partials/UpdatePasswordForm';
+import UpdateProfileInformationForm from '@pages/Profile/Partials/UpdateProfileInformationForm';
+import useTypedPage from '@hooks/useTypedPage';
 
 interface Props {
   sessions: Session[];

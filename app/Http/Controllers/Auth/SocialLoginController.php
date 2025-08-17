@@ -73,6 +73,7 @@ class SocialLoginController extends Controller
                         'password'          => bcrypt($socialUser->getId()),
                         'avatar'            => $socialUser->getAvatar(),
                         'email_verified_at' => now(),
+                        'settings'          => json_encode(config("user")),
                     ]
                 );
 

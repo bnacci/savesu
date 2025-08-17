@@ -58,9 +58,8 @@ export default function Locked({
         <div
           className="bg-center bg-no-repeat bg-cover h-full w-full fixed top-0 left-0"
           style={{
-            backgroundImage:
-              'url(https://wallshub.pw/wp-content/uploads/2024/11/winter-snow-landscape-trees-1920x1280.jpg)',
-            // 'url(https://depositphotos-blog.s3.eu-west-1.amazonaws.com/uploads/2017/07/Soothing-nature-backgrounds-2.jpg)',
+            backgroundImage: `url(${user?.lock_screen_wallpaper || 'http://unsplash.it/1920/1080?random,nature'})`,
+            // https://wallshub.pw/wp-content/uploads/2024/11/winter-snow-landscape-trees-1920x1280.jpg
           }}
         >
           <div

@@ -22,6 +22,16 @@ export interface User {
   email_verified_at: Nullable<DateTime>;
   created_at: DateTime;
   updated_at: DateTime;
+  preferences: UserPreferences;
+  lock_screen_wallpaper: string;
+}
+
+export interface UserPreferences {
+  theme: string;
+  lock_screen: {
+    enabled: boolean;
+    duration: number;
+  };
 }
 
 export interface Auth {
@@ -50,7 +60,12 @@ export type InertiaSharedProps<T = {}> = T & {
   auth: Auth;
   errorBags: any;
   errors: any;
+  defaults: Defaults;
 };
+
+export interface Defaults {
+  lock_screen_duration: number;
+}
 
 export interface Session {
   id: number;

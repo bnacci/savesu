@@ -55,7 +55,14 @@ class SecurityController extends Controller
 
         if (Hash::check($request->password, auth()->user()->password)) {
             session()->forget("user_locked");
-            return redirect(base64_decode($request->ref));
+
+            // Verificar se o parâmetro 'ref' está presente e se é um valor base64 válido
+            $ref = $request->input('ref');
+            if ($ref && base64_decode($ref, true)) {
+                return redirect(base64_decode($ref));
+            } else {
+                return redirect()->route('dashboard'); // Ou outra rota padrão
+            }
         } else {
             return back()->withErrors([
                 'password' => __("auth.errors.password_incorrect"),

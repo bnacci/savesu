@@ -1,14 +1,15 @@
-import useRoute from '@/Hooks/useRoute';
-import ActionMessage from '@/Components/ActionMessage';
-import FormSection from '@/Components/FormSection';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { JetstreamTeamPermissions, Team, User } from '@/types';
-import { useForm } from '@inertiajs/react';
-import classNames from 'classnames';
+import { JetstreamTeamPermissions, Team, User } from '@typed';
+
+import ActionMessage from '@components/ActionMessage';
+import { Button } from '@components/ui/button';
+import FormSection from '@components/FormSection';
+import { Input } from '@components/ui/input';
+import InputError from '@components/InputError';
+import { Label } from '@components/ui/label';
 import React from 'react';
+import classNames from 'classnames';
+import { useForm } from '@inertiajs/react';
+import useRoute from '@hooks/useRoute';
 
 interface Props {
   team: Team & { owner: User };
@@ -41,12 +42,12 @@ export default function UpdateTeamNameForm({ team, permissions }: Props) {
                   Saved.
                 </ActionMessage>
 
-                <PrimaryButton
+                <Button
                   className={classNames({ 'opacity-25': form.processing })}
                   disabled={form.processing}
                 >
                   Save
-                </PrimaryButton>
+                </Button>
               </>
             )
           : undefined
@@ -54,7 +55,7 @@ export default function UpdateTeamNameForm({ team, permissions }: Props) {
     >
       {/* <!-- Team Owner Information --> */}
       <div className="col-span-6">
-        <InputLabel value="Team Owner" />
+        <Label>Team Owner</Label>
 
         <div className="flex items-center mt-2">
           <img
@@ -76,9 +77,9 @@ export default function UpdateTeamNameForm({ team, permissions }: Props) {
 
       {/* <!-- Team Name --> */}
       <div className="col-span-6 sm:col-span-4">
-        <InputLabel htmlFor="name" value="Team Name" />
+        <Label htmlFor="name">Team Name</Label>
 
-        <TextInput
+        <Input
           id="name"
           type="text"
           className="mt-1 block w-full"
