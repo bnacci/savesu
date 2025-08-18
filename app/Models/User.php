@@ -40,6 +40,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'avatar',
         'lock_screen_wallpaper',
         'settings',
+        'timezone',
+        'country',
     ];
 
     /**

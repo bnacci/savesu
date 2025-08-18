@@ -27,6 +27,7 @@ class CreateNewUser implements CreatesNewUsers
             'username' => ['required', 'string', 'min:6', 'max:16', 'unique:users', new AllowedUsername(app('router'), app('files'), app('config'))],
             'password' => $this->passwordRules(),
             'terms'    => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+            'timezone' => ['required', 'string', 'timezone'],
         ], [
             'username.unique' => 'Sorry, this username has already been taken!',
         ])->validate();
@@ -38,6 +39,7 @@ class CreateNewUser implements CreatesNewUsers
                 'username' => $input['username'],
                 'password' => Hash::make($input['password']),
                 'settings' => json_encode(config("user")),
+                'timezone' => $input['timezone'],
             ]), function (User $user) {
                 $this->createTeam($user);
             });

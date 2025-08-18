@@ -18,7 +18,12 @@ export default function Show({
   sessions,
   confirmsTwoFactorAuthentication,
 }: Props) {
-  const page = useTypedPage();
+  const {
+    props: {
+      jetstream,
+      auth: { user },
+    },
+  } = useTypedPage();
 
   return (
     <AppLayout
@@ -31,15 +36,17 @@ export default function Show({
     >
       <div>
         <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-          {page.props.jetstream.canUpdateProfileInformation ? (
+          {jetstream.canUpdateProfileInformation ? (
             <div>
-              <UpdateProfileInformationForm user={page.props.auth.user!} />
+              <UpdateProfileInformationForm user={user!} />
 
               <SectionBorder />
             </div>
           ) : null}
 
-          {page.props.jetstream.canUpdatePassword ? (
+          {jetstream.canUpdatePassword &&
+          !user?.provider &&
+          !user?.provider_id ? (
             <div className="mt-10 sm:mt-0">
               <UpdatePasswordForm />
 
@@ -47,7 +54,7 @@ export default function Show({
             </div>
           ) : null}
 
-          {page.props.jetstream.canManageTwoFactorAuthentication ? (
+          {jetstream.canManageTwoFactorAuthentication ? (
             <div className="mt-10 sm:mt-0">
               <TwoFactorAuthenticationForm
                 requiresConfirmation={confirmsTwoFactorAuthentication}
@@ -61,7 +68,7 @@ export default function Show({
             <LogoutOtherBrowserSessions sessions={sessions} />
           </div>
 
-          {page.props.jetstream.hasAccountDeletionFeatures ? (
+          {jetstream.hasAccountDeletionFeatures ? (
             <>
               <SectionBorder />
 

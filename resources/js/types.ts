@@ -24,6 +24,8 @@ export interface User {
   updated_at: DateTime;
   preferences: UserPreferences;
   lock_screen_wallpaper: string;
+  provider: string | null;
+  provider_id: string | number | null;
 }
 
 export interface UserPreferences {

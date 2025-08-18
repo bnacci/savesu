@@ -19,6 +19,7 @@ type FormProps = {
   password: string;
   password_confirmation: string;
   terms: boolean;
+  timezone: string;
 };
 
 export default function Register({ error }: { error: string }) {
@@ -33,6 +34,7 @@ export default function Register({ error }: { error: string }) {
       password: '',
       password_confirmation: '',
       terms: false,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     },
   );
 
@@ -57,6 +59,13 @@ export default function Register({ error }: { error: string }) {
       }}
       error={error}
     >
+      <input
+        type="hidden"
+        onChange={e => setData('timezone', e.currentTarget.value)}
+        value={data.timezone}
+      />
+      <InputError message={errors.timezone} />
+
       <div className="flex gap-2">
         <div className="grid gap-2 w-full">
           <Label htmlFor="name">{__('common.name')}</Label>

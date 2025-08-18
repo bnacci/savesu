@@ -8,3 +8,16 @@ export function cn(...inputs: ClassValue[]) {
 export function minutesToMilliseconds(minutes: number): number {
   return minutes * 60 * 1000;
 }
+
+export function getInitials(name: string) {
+  const words = name
+    .trim() // remove espaços do início/fim
+    .split(/\s+/); // divide por qualquer quantidade de espaços
+
+  if (words.length === 0) return '';
+
+  const firstLetter = words[0][0];
+  const lastLetter = words[words.length - 1][0];
+
+  return (firstLetter + lastLetter).toUpperCase();
+}
