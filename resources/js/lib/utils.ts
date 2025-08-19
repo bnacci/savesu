@@ -21,3 +21,13 @@ export function getInitials(name: string) {
 
   return (firstLetter + lastLetter).toUpperCase();
 }
+
+export function coinsFormatted(amount: number, locale: string) {
+  const cents = Math.round(amount * 100);
+
+  return new Intl.NumberFormat(locale, {
+    style: 'decimal',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(cents / 100);
+}

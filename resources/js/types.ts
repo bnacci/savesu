@@ -63,6 +63,7 @@ export type InertiaSharedProps<T = {}> = T & {
   errorBags: any;
   errors: any;
   defaults: Defaults;
+  locale: string;
 };
 
 export interface Defaults {

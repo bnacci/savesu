@@ -128,5 +128,7 @@ return [
         'user.unlock',
         'page.locked-page',
         'logout',
+        'policy.show',
+        'terms.show',
     ],
 ];

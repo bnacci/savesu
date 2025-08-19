@@ -5,6 +5,7 @@ import ApplicationMark from '@components/ApplicationMark';
 import Banner from '@components/Banner';
 import Dropdown from '@components/Dropdown';
 import DropdownLink from '@components/DropdownLink';
+import { Input } from '@components/ui/input';
 import Logo from '@components/logo';
 import NavLink from '@components/NavLink';
 import { NavUser } from '@components/nav-user';
@@ -40,11 +41,43 @@ export default function AppLayout({
     <>
       <Head title={title} />
 
-      <header>
+      <header className="border-b border-zinc-100 py-3 top-0 sticky bg-background/20 backdrop-blur-lg z-10">
         <div className="container mx-auto flex items-center justify-between">
           <Link href={route('dashboard')}>
-            <Logo type="single" className="size-10" />
+            <Logo type="single" className="size-8" />
           </Link>
+
+          <div>
+            <ul className="flex gap-x-10">
+              <li>
+                <Link href={route('dashboard')}>Dashboard</Link>
+              </li>
+
+              <li>
+                <a href="#0">
+                  <b>U</b>Store
+                </a>
+              </li>
+
+              <li>
+                <a href="#0">Plans</a>
+              </li>
+
+              <li>
+                <a href="#0">Groups</a>
+              </li>
+
+              <li>
+                <a href="#0">Churchs</a>
+              </li>
+
+              <li>
+                <a href="#0">
+                  <b>U</b>Blogs
+                </a>
+              </li>
+            </ul>
+          </div>
 
           <div className="flex">
             <NavUser />

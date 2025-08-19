@@ -1,8 +1,8 @@
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
-import { LogOut, PowerOff } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
 import { Button } from '@components/ui/button';
+import { IconLogout } from '@tabler/icons-react';
 import { Input } from '@components/ui/input';
 import InputError from '@components/InputError';
 import { router } from '@inertiajs/core';
@@ -65,7 +65,7 @@ export default function Locked({
           <div
             className="absolute h-full w-full top-0 left-0 bg-black/50 transition-all ease-in-out"
             style={{
-              backdropFilter: inputFocused ? 'blur(10px)' : undefined,
+              backdropFilter: inputFocused ? 'blur(20px)' : undefined,
             }}
           ></div>
         </div>
@@ -139,9 +139,9 @@ export default function Locked({
                 <form onSubmit={logout}>
                   <Button
                     variant="ghost"
-                    className="hover:bg-white/30 hover:text-white text-white text-lg"
+                    className="hover:bg-white/30 hover:text-white text-white text-base"
                   >
-                    <LogOut />
+                    <IconLogout className="size-5" />
                     {__('common.log_out')}
                   </Button>
                 </form>

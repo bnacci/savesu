@@ -8,6 +8,7 @@ import { Input } from '@components/ui/input';
 import InputError from '@components/InputError';
 import { Label } from '@components/ui/label';
 import { cn } from '@lib/utils';
+import moment from 'moment-timezone';
 import { useLang } from '@hooks/useLang';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
@@ -34,7 +35,8 @@ export default function Register({ error }: { error: string }) {
       password: '',
       password_confirmation: '',
       terms: false,
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      //   timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      timezone: moment.tz.guess(),
     },
   );
 
@@ -72,7 +74,6 @@ export default function Register({ error }: { error: string }) {
           <Input
             id="name"
             type="text"
-            className="mt-1 block w-full"
             value={data.name}
             onChange={e => setData('name', e.currentTarget.value)}
             autoFocus
@@ -89,7 +90,6 @@ export default function Register({ error }: { error: string }) {
           <Input
             id="username"
             type="text"
-            className="mt-1 block w-full"
             value={data.username}
             onChange={e => setData('username', e.currentTarget.value)}
             autoComplete="username"
@@ -106,7 +106,6 @@ export default function Register({ error }: { error: string }) {
         <Input
           id="email"
           type="email"
-          className="mt-1 block w-full"
           value={data.email}
           onChange={e => setData('email', e.currentTarget.value)}
           disabled={processing}
@@ -123,7 +122,6 @@ export default function Register({ error }: { error: string }) {
             <Input
               id="password"
               type="password"
-              className="mt-1 block w-full"
               value={data.password}
               onChange={e => setData('password', e.currentTarget.value)}
               autoComplete="new-password"
@@ -140,7 +138,6 @@ export default function Register({ error }: { error: string }) {
             <Input
               id="password_confirmation"
               type="password"
-              className="mt-1 block w-full"
               value={data.password_confirmation}
               onChange={e =>
                 setData('password_confirmation', e.currentTarget.value)

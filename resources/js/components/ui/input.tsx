@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { EyeIcon, EyeOffIcon } from 'lucide-react';
+import { IconEye, IconEyeOff } from '@tabler/icons-react';
 
 import { cn } from '@lib/utils';
 import { useState } from 'react';
@@ -45,9 +45,9 @@ function Input({
           tabIndex={-1}
         >
           {isVisible ? (
-            <EyeOffIcon size={20} aria-hidden="true" />
+            <IconEyeOff size={20} aria-hidden="true" />
           ) : (
-            <EyeIcon size={20} aria-hidden="true" />
+            <IconEye size={20} aria-hidden="true" />
           )}
         </button>
       )}

@@ -42,7 +42,7 @@ export function NavUser() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-x-3">
+      <DropdownMenuTrigger className="flex items-center gap-x-3 cursor-pointer">
         <Avatar className="h-8 w-8 rounded-full">
           {managesProfilePhotos && (
             <AvatarImage src={user!.profile_photo_url} alt={user!.name} />

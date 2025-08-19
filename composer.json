@@ -19,6 +19,7 @@
     "laravel/socialite": "^5.0",
     "laravel/tinker": "^2.10.1",
     "mcamara/laravel-localization": "^2.3",
+    "nesbot/carbon": "^3.10",
     "socialiteproviders/discord": "^4.2",
     "socialiteproviders/dribbble": "^4.1",
     "socialiteproviders/facebook": "^4.1",

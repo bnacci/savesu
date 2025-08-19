@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Casts\TimezoneAwareDateTime;
 use App\Traits\HasSettings;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -54,8 +55,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
-        // 'provider',
-        // 'provider_id',
         'avatar',
         'settings',
     ];
@@ -66,7 +65,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => TimezoneAwareDateTime::class,
+        'created_at'        => TimezoneAwareDateTime::class,
+        'updated_at'        => TimezoneAwareDateTime::class,
     ];
 
     /**

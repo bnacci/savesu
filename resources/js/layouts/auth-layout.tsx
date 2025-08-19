@@ -1,6 +1,6 @@
-import { ArrowLeft, GalleryVerticalEnd, Mail } from 'lucide-react';
 import { Button, buttonVariants } from '@components/ui/button';
 import { Head, Link, usePage } from '@inertiajs/react';
+import { IconArrowLeft, IconMail } from '@tabler/icons-react';
 import React, { PropsWithChildren, useEffect, useState } from 'react';
 
 import Logo from '@components/logo';
@@ -118,7 +118,7 @@ export default function AuthLayout({
                           className="hover:underline underline-offset-4 cursor-pointer mx-auto mt-5 flex gap-x-1 items-center"
                           onClick={() => setShowForm(false)}
                         >
-                          <ArrowLeft size={16} />
+                          <IconArrowLeft size={16} />
                           {__('common.back')}
                         </a>
                       )}
@@ -133,7 +133,7 @@ export default function AuthLayout({
                         className="w-full"
                         onClick={() => setShowForm(true)}
                       >
-                        <Mail />
+                        <IconMail />
                         {currentRoute === 'login'
                           ? __('auth.access_with_email')
                           : __('auth.create_account_with_email')}

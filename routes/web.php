@@ -39,6 +39,10 @@ Route::group([
         'verified',
     ])->group(function () {
         Route::get('/dashboard', function () {
+            // date_default_timezone_set(auth()->user()->timezone);
+            // dd(auth()->user()->created_at instanceof Carbon);
+            // return auth()->user()->created_at->format("d/m/Y H:i:s");
+            // return auth()->user()->created_at->setTimezone(auth()->user()->timezone)->format("d-m-Y H:m:s");
             return Inertia::render('Dashboard');
         })->name('dashboard');
     });
