@@ -1,11 +1,8 @@
 import { CookiesProvider, useCookies } from 'react-cookie';
 import React, { ReactNode, useEffect } from 'react';
 
+import { CookieValues } from '@typed';
 import moment from 'moment-timezone';
-
-interface CookieValues {
-  timezone?: string;
-}
 
 function CookieProvider({ children }: { children: ReactNode }) {
   return (

@@ -1,19 +1,27 @@
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@components/ui/breadcrumb';
 import { Head, Link } from '@inertiajs/react';
-import React, { JSX, PropsWithChildren, useState } from 'react';
+import {
+  IconBasketFilled,
+  IconLayoutDashboardFilled,
+} from '@tabler/icons-react';
+import React, { JSX, PropsWithChildren } from 'react';
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from '@components/ui/sidebar';
 
-import ApplicationMark from '@components/ApplicationMark';
-import Banner from '@components/Banner';
-import Dropdown from '@components/Dropdown';
-import DropdownLink from '@components/DropdownLink';
-import { Input } from '@components/ui/input';
-import Logo from '@components/logo';
-import NavLink from '@components/NavLink';
-import { NavUser } from '@components/nav-user';
-import ResponsiveNavLink from '@components/ResponsiveNavLink';
-import { Team } from '@typed';
-import { TeamSwitcher } from '@components/team-switcher';
-import classNames from 'classnames';
-import { router } from '@inertiajs/core';
+import { CookieValues } from '@typed';
+import { DashboardSidebar } from '@components/dashboard/sidebar';
+import { Separator } from '@components/ui/separator';
+import { useCookies } from 'react-cookie';
 import { useLockScreen } from '@hooks/useLockScreen';
 import useRoute from '@hooks/useRoute';
 import useTypedPage from '@hooks/useTypedPage';
@@ -25,67 +33,66 @@ interface Props {
 
 export default function AppLayout({
   title,
-  renderHeader,
   children,
 }: PropsWithChildren<Props>) {
   const {
     props: {
       auth: { user },
       jetstream: { hasTeamFeatures },
+      breadcrumbs,
     },
   } = useTypedPage();
   const route = useRoute();
   const locked = useLockScreen();
+  const [cookies, setCookie] = useCookies<'sidebar_state', CookieValues>([
+    'sidebar_state',
+  ]);
 
   return (
     <>
       <Head title={title} />
 
-      <header className="border-b border-zinc-100 py-3 top-0 sticky bg-background/20 backdrop-blur-lg z-10">
-        <div className="container mx-auto flex items-center justify-between">
-          <Link href={route('dashboard')}>
-            <Logo type="single" className="size-8" />
-          </Link>
+      <SidebarProvider defaultOpen={cookies.sidebar_state}>
+        <DashboardSidebar />
+        <SidebarInset>
+          <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+            <div className="flex items-center gap-2 px-4">
+              <SidebarTrigger className="-ml-1" />
+              <Separator
+                orientation="vertical"
+                className="mr-2 data-[orientation=vertical]:h-4"
+              />
+              <Breadcrumb>
+                <BreadcrumbList>
+                  {breadcrumbs.map((item, index) => (
+                    <div key={index} className="flex items-center gap-x-2">
+                      <BreadcrumbItem className="hidden md:block">
+                        {!item.current ? (
+                          <BreadcrumbLink asChild>
+                            <Link href={item.url}>{item.title}</Link>
+                          </BreadcrumbLink>
+                        ) : (
+                          <BreadcrumbPage>{item.title}</BreadcrumbPage>
+                        )}
+                      </BreadcrumbItem>
 
-          <div>
-            <ul className="flex gap-x-10">
-              <li>
-                <Link href={route('dashboard')}>Dashboard</Link>
-              </li>
+                      {index !== breadcrumbs.length - 1 && (
+                        <BreadcrumbSeparator className="hidden md:block" />
+                      )}
+                    </div>
+                  ))}
+                  {/* <BreadcrumbSeparator className="hidden md:block" />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                  </BreadcrumbItem> */}
+                </BreadcrumbList>
+              </Breadcrumb>
+            </div>
+          </header>
 
-              <li>
-                <a href="#0">
-                  <b>U</b>Store
-                </a>
-              </li>
-
-              <li>
-                <a href="#0">Plans</a>
-              </li>
-
-              <li>
-                <a href="#0">Groups</a>
-              </li>
-
-              <li>
-                <a href="#0">Churchs</a>
-              </li>
-
-              <li>
-                <a href="#0">
-                  <b>U</b>Blogs
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="flex">
-            <NavUser />
-          </div>
-        </div>
-      </header>
-
-      <div className="min-h-screen">{children}</div>
+          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
+        </SidebarInset>
+      </SidebarProvider>
     </>
   );
 

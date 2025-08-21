@@ -37,14 +37,30 @@ Route::group([
         'auth:sanctum',
         config('jetstream.auth_session'),
         'verified',
-    ])->group(function () {
-        Route::get('/dashboard', function () {
-            // date_default_timezone_set(auth()->user()->timezone);
-            // dd(auth()->user()->created_at instanceof Carbon);
-            // return auth()->user()->created_at->format("d/m/Y H:i:s");
-            // return auth()->user()->created_at->setTimezone(auth()->user()->timezone)->format("d-m-Y H:m:s");
+    ])->prefix("dashboard")->group(function () {
+        Route::get('/', function () {
             return Inertia::render('Dashboard');
-        })->name('dashboard');
+        })->name('dashboard')->breadcrumb('Dashboard');
+    });
+
+    Route::prefix("user")->group(function () {
+        Route::get("chats", function () {
+            return Inertia::render('Dashboard');
+        })->name("user.chats");
+    });
+
+    Route::prefix("apps")->group(function () {
+        Route::get("bible", function () {
+            return Inertia::render('Dashboard');
+        })->name("bible");
+
+        Route::get("records", function () {
+            return Inertia::render('Dashboard');
+        })->name("records");
+
+        Route::get("podcast", function () {
+            return Inertia::render('Dashboard');
+        })->name("podcast");
     });
 
     Route::get('/oauth/{provider}', [SocialLoginController::class, 'redirectToProvider'])->name("oauth");

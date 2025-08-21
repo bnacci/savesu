@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TermsAndPolicyView;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
 use Laravel\Jetstream\Http\Controllers\Inertia\ApiTokenController;
 use Laravel\Jetstream\Http\Controllers\Inertia\CurrentUserController;
@@ -54,6 +55,9 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
             // Teams...
             if (Jetstream::hasTeamFeatures()) {
+                Route::get('/teams', function () {
+                    return Inertia::render("About");
+                })->name('teams.index');
                 Route::get('/teams/create', [TeamController::class, 'create'])->name('teams.create');
                 Route::post('/teams', [TeamController::class, 'store'])->name('teams.store');
                 Route::get('/teams/{team}', [TeamController::class, 'show'])->name('teams.show');

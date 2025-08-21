@@ -64,6 +64,11 @@ export type InertiaSharedProps<T = {}> = T & {
   errors: any;
   defaults: Defaults;
   locale: string;
+  breadcrumbs: {
+    title: string;
+    url: string;
+    current?: string;
+  }[];
 };
 
 export interface Defaults {
@@ -112,4 +117,9 @@ export interface TeamInvitation {
   role: Nullable<string>;
   created_at: DateTime;
   updated_at: DateTime;
+}
+
+export interface CookieValues {
+  timezone?: string;
+  sidebar_state?: boolean;
 }

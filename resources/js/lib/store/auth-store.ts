@@ -5,11 +5,13 @@ import { create } from 'zustand';
 type AuthStoreState = {
   showForm: boolean;
   showedSlogan: boolean;
+  showUpgradeForm: boolean;
 };
 
 type AuthStoreActions = {
   setShowForm: (show: AuthStoreState['showForm']) => void;
   setShowedSlogan: (show: AuthStoreState['showedSlogan']) => void;
+  setShowUpgradeForm: (show: AuthStoreState['showUpgradeForm']) => void;
 };
 
 type AuthStore = AuthStoreState & AuthStoreActions;
@@ -27,6 +29,12 @@ export const useAuthStore = create<AuthStore>()(
       setShowedSlogan: (show: AuthStoreState['showedSlogan']) => {
         set(state => ({
           showedSlogan: show,
+        }));
+      },
+      showUpgradeForm: true,
+      setShowUpgradeForm: (show: AuthStoreState['showUpgradeForm']) => {
+        set(state => ({
+          showUpgradeForm: show,
         }));
       },
     }),
