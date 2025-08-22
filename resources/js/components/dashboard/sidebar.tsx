@@ -108,6 +108,7 @@ const data = {
             default: IconBubbleText,
           },
           isActive: false,
+          count: 10,
         },
         {
           title: 'Channels',

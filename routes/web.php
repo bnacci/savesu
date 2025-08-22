@@ -45,7 +45,7 @@ Route::group([
 
     Route::prefix("user")->group(function () {
         Route::get("chats", function () {
-            return Inertia::render('Dashboard');
+            return Inertia::render('user/chats');
         })->name("user.chats");
     });
 

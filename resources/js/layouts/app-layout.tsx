@@ -20,6 +20,7 @@ import {
 
 import { CookieValues } from '@typed';
 import { DashboardSidebar } from '@components/dashboard/sidebar';
+import { ScrollArea } from '@components/ui/scroll-area';
 import { Separator } from '@components/ui/separator';
 import { useCookies } from 'react-cookie';
 import { useLockScreen } from '@hooks/useLockScreen';
@@ -54,7 +55,7 @@ export default function AppLayout({
 
       <SidebarProvider defaultOpen={cookies.sidebar_state}>
         <DashboardSidebar />
-        <SidebarInset>
+        <SidebarInset className="max-h-[calc(100vh_-_theme(spacing.4))] overflow-hidden">
           <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
             <div className="flex items-center gap-2 px-4">
               <SidebarTrigger className="-ml-1" />
@@ -90,7 +91,11 @@ export default function AppLayout({
             </div>
           </header>
 
-          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</div>
+          <ScrollArea className="h-full">
+            <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+              {children}
+            </div>
+          </ScrollArea>
         </SidebarInset>
       </SidebarProvider>
     </>
