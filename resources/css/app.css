@@ -139,6 +139,15 @@
   --color-3: oklch(69.6% 0.165 251);
   --color-4: oklch(80.2% 0.134 225);
   --color-5: oklch(90.7% 0.231 133);
+
+  --microlink-background-color: #fff;
+  --microlink-border-style: solid;
+  --microlink-border-width: 1px;
+  --microlink-border: 1px solid #e1e8ed;
+  --microlink-color: #181919;
+  --microlink-hover-background-color: #f5f8fa;
+  --microlink-hover-border-color: #8899a680;
+  --microlink-max-width: 500px;
 }
 
 @layer base {

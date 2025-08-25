@@ -71,6 +71,33 @@ export type InertiaSharedProps<T = {}> = T & {
   }[];
 };
 
+export interface ChatMessages {
+  sender_id: number;
+  messages: ChatMessage[];
+}
+
+export interface ChatMessage {
+  id: string | number;
+  content: string;
+  created_at: string;
+}
+
+export type Message = {
+  id: number | string;
+  sender_id: number;
+  //   receiver_id: number;
+  content: string;
+  created_at: string;
+};
+
+export type FlattenedMessage = {
+  id: number | string;
+  sender_id: number;
+  //   receiver_id: number;
+  content: string;
+  created_at: string;
+};
+
 export interface Defaults {
   lock_screen_duration: number;
 }

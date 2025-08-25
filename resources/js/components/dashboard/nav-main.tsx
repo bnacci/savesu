@@ -47,7 +47,9 @@ export function NavMain({ items }: { items: ItemsProp[] }) {
     <SidebarGroup>
       {items.map(({ items, label }) => (
         <div key={label}>
-          <SidebarGroupLabel>{label}</SidebarGroupLabel>
+          <SidebarGroupLabel className="pointer-events-none select-none">
+            {label}
+          </SidebarGroupLabel>
           <SidebarMenu>
             {items.map(
               ({

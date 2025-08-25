@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\Controllers\Pages\LockedPageController;
+use App\Http\Controllers\User\ChatController;
 use App\Http\Controllers\User\SecurityController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -44,9 +45,10 @@ Route::group([
     });
 
     Route::prefix("user")->group(function () {
-        Route::get("chats", function () {
-            return Inertia::render('user/chats');
-        })->name("user.chats");
+        Route::prefix("chats")->group(function () {
+            Route::get("/", [ChatController::class, "index"])->name("user.chats");
+            Route::post("/messages", [ChatController::class, "getMessages"])->name("user.chat.messages");
+        });
     });
 
     Route::prefix("apps")->group(function () {

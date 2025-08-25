@@ -16,7 +16,7 @@ function Input({
   const toggleVisibility = () => setIsVisible(prevState => !prevState);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <input
         // type={type}
         type={isVisible ? 'text' : type}
